@@ -17,6 +17,13 @@ public class PostController {
         this.postService = postService;
     }
 
+    @GetMapping("/posts/likes")
+    public List<PostAllResponseDto> viewAllPostsWithLikes(@RequestParam(name="likes",required = false) Integer likes,
+                                                          @RequestParam(name="title",required = false) String title) {
+//        return "viewAllPosts";
+        return postService.getAllPostsWithLikes(likes, title);
+    }
+
     @GetMapping("/posts")
     public List<PostAllResponseDto> viewAllPosts() {
 //        return "viewAllPosts";

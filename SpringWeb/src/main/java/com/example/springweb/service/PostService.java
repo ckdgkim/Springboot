@@ -27,6 +27,15 @@ public class PostService {
         return postDtos;
     }
 
+    public List<PostAllResponseDto> getAllPostsWithLikes(Integer likes, String title) {
+//        return "PostService 가 호출되었습니다.";
+        List<Post> allposts = postRepository.findAllWithLikes(likes, title);
+        List<PostAllResponseDto> postDtos = allposts.stream()
+                .map(PostAllResponseDto::of)
+                .collect(Collectors.toList());
+        return postDtos;
+    }
+
     public PostDetailResponseDto getPostDetail(int postId) {
         Post post = postRepository.findById(postId);
         PostDetailResponseDto retPost = new PostDetailResponseDto(
@@ -54,6 +63,7 @@ public class PostService {
             likes = post.getLikes() + 1;
             post.setLikes(likes);
         }
+        postRepository.updatePost(post);
         return likes;
     }
 

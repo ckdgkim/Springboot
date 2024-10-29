@@ -8,12 +8,14 @@ import lombok.Data;
 public class PostAllResponseDto {
     private int postId;
     private String title;
+    private String body;
     private int likes;
 
     public static PostAllResponseDto of(Post post) {
         return new PostAllResponseDto(
                 post.getPostId(),
                 post.getTitle(),
+                post.getBody(),
                 post.getLikes()
         );
     }
